@@ -68,7 +68,56 @@ export default function DashboardPage() {
     );
   }
 
-
+  const quickActions = [
+    {
+      title: 'Highlight Tape Services',
+      description: 'Manage $900-$2,000 highlight packages for college recruitment',
+      icon: VideoCameraIcon,
+      href: '/video-analysis',
+      color: 'bg-purple-600/20',
+      iconColor: 'text-purple-400'
+    },
+    {
+      title: 'Training Programs',
+      description: 'Soccer development programs and personalized coaching',
+      icon: PlayIcon,
+      href: '/training',
+      color: 'bg-blue-600/20',
+      iconColor: 'text-blue-400'
+    },
+    {
+      title: 'Business Analytics',
+      description: 'Revenue tracking, customer metrics, and growth insights',
+      icon: ChartBarIcon,
+      href: '/progress', 
+      color: 'bg-emerald-600/20',
+      iconColor: 'text-emerald-400'
+    },
+    {
+      title: 'Supplement Sales',
+      description: 'Track $300+ supplement stack sales and inventory',
+      icon: DocumentTextIcon,
+      href: '/nutrition',
+      color: 'bg-rose-600/20',
+      iconColor: 'text-rose-400'
+    },
+    {
+      title: 'Customer Communications',
+      description: 'Manage client relationships and support',
+      icon: ChatBubbleLeftRightIcon,
+      href: '/messages',
+      color: 'bg-amber-600/20',
+      iconColor: 'text-amber-400'
+    },
+    {
+      title: 'Admin Settings',
+      description: 'Business management and system configuration',
+      icon: UserIcon,
+      href: '/profile',
+      color: 'bg-zinc-600/20',
+      iconColor: 'text-zinc-400'
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-black text-white relative overflow-hidden flex">
@@ -83,7 +132,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 relative z-10 pl-4">
+      <div className="flex-1 relative z-10">
         {/* Header */}
         <header className="px-8 py-6 border-b border-zinc-800/50">
           <div className="flex justify-between items-center">
@@ -157,9 +206,61 @@ export default function DashboardPage() {
             </div>
           </div>
 
+          {/* Quick Actions Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {quickActions.map((action) => {
+              const Icon = action.icon;
+              return (
+                <Link
+                  key={action.title}
+                  href={action.href}
+                  className="group bg-zinc-900/50 backdrop-blur-sm rounded-lg p-8 border border-zinc-800 hover:border-zinc-600 transition-all duration-200 hover:bg-zinc-800/50 cursor-pointer active:bg-zinc-700/50"
+                >
+                  <div className="flex items-center space-x-4 mb-4">
+                    <div className={`w-12 h-12 ${action.color} rounded-lg flex items-center justify-center`}>
+                      <Icon className={`h-6 w-6 ${action.iconColor}`} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">
+                        {action.title}
+                      </h3>
+                    </div>
+                    <ArrowRightIcon className="h-5 w-5 text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                  </div>
+                  <p className="text-zinc-400 leading-relaxed">
+                    {action.description}
+                  </p>
+                </Link>
+              );
+            })}
+          </div>
 
-
-
+          {/* Recent Activity */}
+          <div className="bg-zinc-900/50 backdrop-blur-sm rounded-lg p-8 border border-zinc-800 mb-8">
+            <h2 className="text-xl font-semibold mb-6">Recent Activity</h2>
+            <div className="space-y-4">
+              {[
+                { title: 'Unified Dashboard Deployed', time: '2 hours ago', icon: CheckCircleIcon, color: 'text-emerald-400' },
+                { title: 'AI Agent System Optimized', time: '4 hours ago', icon: CogIcon, color: 'text-blue-400' },
+                { title: 'Supplement Sales Integration', time: '1 day ago', icon: DocumentTextIcon, color: 'text-rose-400' },
+                { title: 'Customer Portal V2 Launch', time: '2 days ago', icon: TrophyIcon, color: 'text-amber-400' },
+                { title: 'Shopify Store Sync Complete', time: '3 days ago', icon: CheckCircleIcon, color: 'text-emerald-400' }
+              ].map((activity, index) => {
+                const Icon = activity.icon;
+                return (
+                  <div key={index} className="flex items-center space-x-4 py-3 border-b border-zinc-800 last:border-b-0">
+                    <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center">
+                      <Icon className={`h-5 w-5 ${activity.color}`} />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-white font-medium">{activity.title}</div>
+                      <div className="text-zinc-400 text-sm">{activity.time}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </main>
       </div>
     </div>
